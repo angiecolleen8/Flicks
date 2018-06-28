@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.codepath.acfoley.flicks.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -12,6 +13,8 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -26,7 +29,10 @@ public class MovieListActivity extends AppCompatActivity {
     public final static String TAG = "MovieListActivity";
     //secure base url for loading images
     String imageBaseUrl;
+    //poster size to use when fetching images
     String posterSize;
+    //parsed list of currently playing movies
+    ArrayList<Movie> movies;
 
 
     //instance fields - only have values associated with instances of MovieListActivity
@@ -38,8 +44,27 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_list);
         //initialize client
         client = new AsyncHttpClient();
+        //initialize ArrayList movies
+        movies = new ArrayList<>();
         //get configuration upon app creation
         getConfiguration();
+    }
+
+
+
+    /* START HERE: EPISODE 3 5:15*/
+    //get list of currently playing movies from api
+    private void getNowPlaying() {
+        //create url
+        String url = API_BASE_URL + "/movies/get-now-playing";
+        //set request params
+        RequestParams params = new RequestParams();
+        params.put(API_KEY_PARAM, getString(R.string.api_key)); //API key --required
+        //execute GET request. expect JSON object response
+        client.get(url, params, new JsonHttpResponseHandler(){
+
+        });
+
     }
 
     private void getConfiguration() {
