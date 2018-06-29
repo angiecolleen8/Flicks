@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.acfoley.flicks.models.Config;
+import com.codepath.acfoley.flicks.models.GlideApp;
 import com.codepath.acfoley.flicks.models.Movie;
 
 import java.util.ArrayList;
@@ -17,18 +19,24 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     //list of movies
     ArrayList<Movie> movies;
+    //we need config for image urls
+    Config config;
+    //context for rendering
+    Context context;
 
     //initialize with list of movies
     public MovieAdapter(ArrayList<Movie> movies) {
         this.movies = movies;
     }
 
+    public void setConfig(Config config){this.config = config;}
+
     //creates and inflates a new view
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         //get the context and create the inflater
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         //create viewholder using item_movie layout
         View movieView = inflater.inflate(R.layout.item_movie, parent, false);
@@ -46,8 +54,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         viewHolder.tvTitle.setText(movie.getTitle());
         viewHolder.tvOverview.setText(movie.getOverview());
 
-        //TODO - set image using Glide
+        //build image url using config
+        String imageUrl = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
 
+        //load image using glide
+        GlideApp.with(context)
+                .load(imageUrl)
+                .placeholder(R.drawable.flicks_backdrop_placeholder)
+                .error(R.drawable.flicks_backdrop_placeholder)
+                .into(viewHolder.ivPosterImage);
     }
 
     //returns total number of items in list

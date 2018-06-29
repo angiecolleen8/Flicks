@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/ivPosterImage"
+        android:textStyle="bold"
         android:text="Movie Title" />
 
     <TextView
@@ -29,6 +30,8 @@
         android:layout_below="@+id/tvTitle"
         android:layout_toRightOf="@id/ivPosterImage"
         android:layout_centerHorizontal="true"
-        android:text="Overview and synopsis of movie" />
+        android:text="Overview and synopsis of movie"
+        android:ellipsize="end"/>
+    <!--android:layout_alignBottom="@id/ivPosterImage"-->
 
 </RelativeLayout>

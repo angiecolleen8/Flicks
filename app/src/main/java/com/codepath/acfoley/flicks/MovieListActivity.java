@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.codepath.acfoley.flicks.models.Config;
 import com.codepath.acfoley.flicks.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -36,7 +37,8 @@ public class MovieListActivity extends AppCompatActivity {
     RecyclerView rvMovies;
     //Adapter wired to recycler view
     MovieAdapter adapter;
-
+    //image configuation
+    Config config;
 
     //instance fields - only have values associated with instances of MovieListActivity
     AsyncHttpClient client;
@@ -109,9 +111,12 @@ public class MovieListActivity extends AppCompatActivity {
                 super.onSuccess(statusCode, headers, response);
                 //poster size to use when fetching images - part of url
                 try {
-                    //
-
-                    Log.i(TAG, String.format("Loaded configuration imageBaseURL %s and posterSize %s", posterSize, imageBaseUrl));
+                    config = new Config(response);
+                    Log.i(TAG, String.format("Loaded configuration imageBaseURL %s and posterSize %s",
+                            config.getPosterSize(),
+                            config.getImageBaseUrl()));
+                    //pass config to adapter
+                    adapter.setConfig(config);
                     //get now playing movie list
                     getNowPlaying(); //moved here so that getConfiguration has to execute BEFORE getNowPlaying
 
@@ -125,7 +130,6 @@ public class MovieListActivity extends AppCompatActivity {
                 logError("Failed getting configuration", throwable, true);
             }
         });
-
     }
 
     //handle errors and alert user

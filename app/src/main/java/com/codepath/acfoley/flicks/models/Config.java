@@ -20,4 +20,18 @@ public class Config {
         posterSize = posterSizeOptions.optString(3, "w342");
 
     }
+
+    //helper methods for creating urls
+    public String getImageUrl(String size, String path) { ///concatenate 3 pieces of image url
+       return String.format("%s%s%s", imageBaseUrl, size, path);
+    }
+
+    //getter methods
+    public String getImageBaseUrl() {
+        return imageBaseUrl;
+    }
+
+    public String getPosterSize() {
+        return posterSize;
+    }
 }
