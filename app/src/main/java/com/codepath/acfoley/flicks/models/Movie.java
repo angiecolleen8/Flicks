@@ -9,12 +9,14 @@ public class Movie {
     private String title;
     private String posterPath;
     private String overview;
+    private String backdropPath;
 
     //constructor--initialize from JSON data
     public Movie (JSONObject object) throws JSONException {
         title = object.getString("title"); //use keys
         overview = object.getString("overview");
         posterPath = object.getString("poster_path");
+        backdropPath = object.getString("backdrop_path");
     }
 
     public String getOverview() {
@@ -25,7 +27,8 @@ public class Movie {
         return title;
     }
 
-    public String getPosterPath() {
-        return posterPath;
-    }
+    public String getBackdropPath() { return backdropPath; }
+
+    public String getPosterPath() { return posterPath; }
+
 }
