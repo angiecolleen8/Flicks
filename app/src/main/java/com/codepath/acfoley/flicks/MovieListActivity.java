@@ -29,10 +29,7 @@ public class MovieListActivity extends AppCompatActivity {
     public final static String API_KEY_PARAM = "api_key";
     //tag for logging
     public final static String TAG = "MovieListActivity";
-    //secure base url for loading images
-    String imageBaseUrl;
-    //poster size to use when fetching images
-    String posterSize;
+
     //parsed list of currently playing movies
     ArrayList<Movie> movies;
     //the recycler view
@@ -113,11 +110,7 @@ public class MovieListActivity extends AppCompatActivity {
                 //poster size to use when fetching images - part of url
                 try {
                     //
-                    JSONObject images = response.getJSONObject("images");
-                    imageBaseUrl = images.getString("secure_base_url");
-                    JSONArray posterSizeOptions = images.getJSONArray("poster_sizes");
-                //try to use option 3, else size 342
-                    posterSize = posterSizeOptions.optString(3, "w342");
+
                     Log.i(TAG, String.format("Loaded configuration imageBaseURL %s and posterSize %s", posterSize, imageBaseUrl));
                     //get now playing movie list
                     getNowPlaying(); //moved here so that getConfiguration has to execute BEFORE getNowPlaying
