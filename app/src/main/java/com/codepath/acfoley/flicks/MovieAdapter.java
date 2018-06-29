@@ -56,7 +56,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         viewHolder.tvOverview.setText(movie.getOverview());
 
         //build image url using config
-        String imageUrl = config.getImageUrl(config.getPosterSize(), movie.getPosterPath());
+        String imageUrl = config.getImageUrl(/*config.getPosterSize()*/"", movie.getPosterPath());
 
         //load image using glide
         GlideApp.with(context)
