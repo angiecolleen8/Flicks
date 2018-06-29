@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.acfoley.flicks.models.Config;
 import com.codepath.acfoley.flicks.models.GlideApp;
 import com.codepath.acfoley.flicks.models.Movie;
@@ -60,6 +61,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         //load image using glide
         GlideApp.with(context)
                 .load(imageUrl)
+                .transform(new RoundedCorners(25))
                 .placeholder(R.drawable.flicks_backdrop_placeholder)
                 .error(R.drawable.flicks_backdrop_placeholder)
                 .into(viewHolder.ivPosterImage);
