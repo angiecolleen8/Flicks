@@ -17,7 +17,7 @@ The following **optional** features are implemented:
   * [x] Title, Poster Image, Overview (Portrait mode)
   * [x] Title, Backdrop Image, Overview (Landscape mode)
 * [x] Display a nice default [placeholder graphic](https://guides.codepath.com/android/Displaying-Images-with-the-Glide-Library#advanced-usage) for each image during loading
-* [ ] Allow user to view details of the movie including ratings and popularity within a separate activity
+* [x] Allow user to view details of the movie including ratings and popularity within a separate activity
 * [x] Improved the user interface by experimenting with styling and coloring.
 * [X] Apply rounded corners for the poster or background images using [Glide transformations](https://guides.codepath.com/android/Displaying-Images-with-the-Glide-Library#transformations)
 * [ ] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
@@ -31,7 +31,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/angiecolleen8/Flicks/blob/master/FlicksWalkthroughLandscape.gif' />
+<img src='https://github.com/angiecolleen8/Flicks/blob/master/FlicksWalkthroughDetails4.gif' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
@@ -39,6 +39,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 I didn't encounter any major stoppers, however at first I had a problem with rendering the images. Eventually the problem was found. There were several small errors in pieces of my URL.
+
+I designed the portrait view so that the overview text is level with the bottom edge of the movie poster. The movie title can be clicked to see the full overview.
 
 ## Open-source libraries used
 
