@@ -1,6 +1,7 @@
 package com.codepath.acfoley.flicks;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.acfoley.flicks.models.Config;
 import com.codepath.acfoley.flicks.models.GlideApp;
 import com.codepath.acfoley.flicks.models.Movie;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         this.movies = movies;
     }
 
-    public void setConfig(Config config){this.config = config;}
+    public void setConfig(Config config) {
+        this.config = config;
+    }
 
     //creates and inflates a new view
     @NonNull
@@ -49,7 +54,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     //binds an inflated view to a new item
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-    //get the movie data at the specified position
+        //get the movie data at the specified position
         Movie movie = movies.get(position);
 
         //populate View with movie data
@@ -64,7 +69,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
         //if in portrait mode, load portrait poster
         if (isPortrait) {
-            imageUrl = config.getImageUrl(/*config.getPosterSize()*/ "", movie.getPosterPath());
+            imageUrl = config.getImageUrl(/*config.getPosterSize()*/"", movie.getPosterPath());
         } else {
             imageUrl = config.getImageUrl(/*config.getBackdropSize()*/ "", movie.getBackdropPath()); //make getBackropPosterSize method
         }
@@ -88,7 +93,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     //create ViewHolder - static inner class
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         //track view objects
         ImageView ivPosterImage;
@@ -104,6 +109,25 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             ivBackdropView = (ImageView) itemView.findViewById(R.id.ivBackdropImage);
             tvOverview = (TextView) itemView.findViewById(R.id.tvOverview);
             tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            //gets item position
+            int position = getAdapterPosition();
+            // make sure the position is valid, i.e. actually exists in the view
+            if (position != RecyclerView.NO_POSITION) {
+                // get the movie at the position, this is why class can't be static
+                Movie movie = movies.get(position);
+                // create intent for new activity
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+                // serialize movie using parceller, short name is key
+                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+                // show the activity
+                context.startActivity(intent);
+            }
         }
     }
 }

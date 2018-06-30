@@ -2,14 +2,19 @@ package com.codepath.acfoley.flicks.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class Movie {
 
     //values obtained from API
-    private String title;
-    private String posterPath;
-    private String overview;
-    private String backdropPath;
+    String title;
+    String posterPath;
+    String overview;
+    String backdropPath;
+    Double voteAverage;
+
+    public Movie() {}
 
     //constructor--initialize from JSON data
     public Movie (JSONObject object) throws JSONException {
@@ -17,6 +22,7 @@ public class Movie {
         overview = object.getString("overview");
         posterPath = object.getString("poster_path");
         backdropPath = object.getString("backdrop_path");
+        voteAverage = object.getDouble("vote_average");
     }
 
     public String getOverview() {
@@ -31,4 +37,5 @@ public class Movie {
 
     public String getPosterPath() { return posterPath; }
 
+    public Double getVoteAverage() { return voteAverage; }
 }
